@@ -3,282 +3,299 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>0xGreenNinja | Patrick Innocent Amaibi</title>
+    <title>GreenNinja</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- Web3 Fonts: Inter for readability, JetBrains Mono for the 'Terminal' feel -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-primary: #0B0F0C;
-            --surface-secondary: #0F1512;
-            --accent-green: #2CFF6B;
-            --accent-glow: rgba(44, 255, 107, 0.3);
-            --accent-soft: rgba(44, 255, 107, 0.05);
-            --text-main: #E0E0E0;
-            --text-dim: #64748B;
-            --transition-web3: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            --bg-deep: #050505;
+            --surface: rgba(15, 21, 18, 0.7);
+            --accent: #2CFF6B;
+            --accent-glow: rgba(44, 255, 107, 0.2);
+            --text: #F0F0F0;
+            --text-dim: #8892B0;
+            --border: rgba(44, 255, 107, 0.1);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            background-color: var(--bg-primary);
-            color: var(--text-main);
+            background-color: var(--bg-deep);
+            color: var(--text);
             font-family: 'Inter', sans-serif;
-            line-height: 1.6;
             overflow-x: hidden;
+            line-height: 1.6;
         }
 
-        /* Web3 Background Effects */
-        body::before {
+        /* Fixed Background Dragon */
+        .bg-dragon {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('dragon.png') center center no-repeat;
+            background-size: cover;
+            opacity: 0.06; /* Spec: Very low opacity */
+            z-index: -2;
+            pointer-events: none;
+            filter: grayscale(1) contrast(1.2);
+            animation: slowDrift 60s infinite alternate ease-in-out;
+        }
+
+        @keyframes slowDrift {
+            from { transform: scale(1); }
+            to { transform: scale(1.1); }
+        }
+
+        /* Scanline effect for Web3 vibe */
+        body::after {
             content: "";
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background-image: radial-gradient(var(--accent-soft) 1px, transparent 1px);
-            background-size: 40px 40px;
-            z-index: -3;
-            opacity: 0.5;
-        }
-
-        /* Scanline Overlay */
-        .scanlines {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(to bottom, rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%);
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%);
             background-size: 100% 4px;
             z-index: 100;
             pointer-events: none;
             opacity: 0.1;
         }
 
-        /* Floating Dragon SVG */
-        .dragon-guardian {
-            position: fixed;
-            width: 500px;
-            z-index: -1;
-            opacity: 0.1;
-            pointer-events: none;
-            animation: dragonFloat 60s infinite ease-in-out;
-        }
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; position: relative; }
 
-        @keyframes dragonFloat {
-            0% { top: 10%; left: -20%; transform: rotate(10deg); }
-            50% { top: 50%; left: 80%; transform: rotate(-10deg) scale(1.2); }
-            100% { top: 10%; left: -20%; transform: rotate(10deg); }
-        }
-
-        .container { max-width: 1000px; margin: 0 auto; padding: 0 2rem; }
-
-        /* Typography & Terminal Style */
-        .mono { font-family: 'JetBrains Mono', monospace; text-transform: uppercase; letter-spacing: 2px; }
-        h1 { font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 600; line-height: 1; margin-bottom: 1rem; color: #fff; }
-        h2 { font-size: 0.8rem; margin-bottom: 2rem; color: var(--accent-green); display: flex; align-items: center; gap: 10px; }
-        h2::after { content: ""; height: 1px; flex-grow: 1; background: var(--accent-soft); }
-
-        nav { padding: 3rem 0; display: flex; justify-content: space-between; align-items: center; }
-        .status-pill { border: 1px solid var(--accent-green); padding: 4px 12px; border-radius: 100px; font-size: 0.7rem; color: var(--accent-green); box-shadow: 0 0 10px var(--accent-glow); }
-
-        /* Hero */
-        .hero {
-            padding: 4rem 0 8rem;
-            display: grid;
-            grid-template-columns: 1.2fr 0.8fr;
-            gap: 4rem;
+        /* Navigation */
+        nav {
+            padding: 2.5rem 0;
+            display: flex;
+            justify-content: space-between;
             align-items: center;
         }
 
-        .profile-container { position: relative; }
+        .mono { font-family: 'JetBrains Mono', monospace; text-transform: uppercase; letter-spacing: 2px; font-size: 0.8rem; }
+        .logo { color: var(--accent); font-weight: 600; text-decoration: none; }
+        .status { display: flex; align-items: center; gap: 8px; font-size: 0.65rem; color: var(--accent); }
+        .dot { width: 6px; height: 6px; background: var(--accent); border-radius: 50%; box-shadow: 0 0 10px var(--accent); }
+
+        /* Hero Section */
+        .hero {
+            padding: 4rem 0 10rem;
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 5rem;
+            align-items: center;
+        }
+
+        h1 { font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 600; line-height: 1; margin-bottom: 1.5rem; letter-spacing: -2px; }
+        .hero p { font-size: 1.1rem; color: var(--text-dim); max-width: 500px; margin-bottom: 2.5rem; }
+
+        .profile-wrapper {
+            position: relative;
+            z-index: 1;
+        }
+
         .profile-img {
             width: 100%;
-            max-width: 350px;
-            border-radius: 2px;
-            filter: grayscale(1) contrast(1.2);
-            border: 1px solid var(--accent-green);
-            transition: var(--transition-web3);
+            max-width: 380px;
+            border-radius: 4px;
+            border: 1px solid var(--border);
+            filter: grayscale(0.4) contrast(1.1);
+            transition: 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        .profile-container::after {
-            content: "ID: GREEN_NINJA";
+
+        .profile-wrapper::before {
+            content: "";
             position: absolute;
-            bottom: -15px; right: 20px;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.6rem;
-            background: var(--accent-green);
-            color: #000;
-            padding: 2px 8px;
+            top: -20px; right: -20px;
+            width: 100px; height: 100px;
+            border-top: 2px solid var(--accent);
+            border-right: 2px solid var(--accent);
+            z-index: -1;
         }
 
-        .hero:hover .profile-img { filter: grayscale(0); border-radius: 20px; box-shadow: 0 0 30px var(--accent-glow); }
-
-        /* Experience Section (Proof of Work) */
-        .work-grid { display: flex; flex-direction: column; gap: 1rem; }
-        .work-item {
-            background: var(--surface-secondary);
-            padding: 2rem;
-            border-left: 2px solid var(--accent-soft);
-            transition: var(--transition-web3);
-            cursor: crosshair;
+        .profile-wrapper:hover .profile-img {
+            filter: grayscale(0);
+            border-color: var(--accent);
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
         }
-        .work-item:hover {
-            border-left-color: var(--accent-green);
-            background: rgba(44, 255, 107, 0.02);
-            padding-left: 2.5rem;
-        }
-        .work-item h3 { font-size: 1.2rem; color: #fff; margin-bottom: 0.5rem; }
-        .work-item .org { color: var(--accent-green); font-size: 0.8rem; margin-bottom: 1rem; }
-        .work-item ul { list-style: none; font-size: 0.9rem; color: var(--text-dim); }
-        .work-item li { margin-bottom: 0.4rem; }
-        .work-item li::before { content: "> "; color: var(--accent-green); }
 
-        /* Skills (The Stack) */
-        .stack-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; }
-        .stack-box {
-            border: 1px solid var(--accent-soft);
-            padding: 1rem;
-            text-align: center;
-            font-size: 0.75rem;
-            color: var(--text-dim);
+        /* Section Layout */
+        section { margin-bottom: 8rem; }
+        .section-tag { color: var(--accent); margin-bottom: 1rem; display: block; }
+        h2 { font-size: 2rem; margin-bottom: 2rem; font-weight: 400; }
+
+        /* Grid for Work/Experience */
+        .work-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
+        .card {
+            background: var(--surface);
+            backdrop-filter: blur(10px);
+            padding: 2.5rem;
+            border: 1px solid var(--border);
+            border-radius: 4px;
             transition: 0.3s;
         }
-        .stack-box:hover { border-color: var(--accent-green); color: var(--accent-green); background: var(--accent-soft); }
 
-        /* Buttons & Interaction */
+        .card:hover {
+            border-color: var(--accent);
+            background: rgba(44, 255, 107, 0.03);
+            transform: scale(1.02);
+        }
+
+        .card h3 { font-size: 1.2rem; margin-bottom: 0.5rem; }
+        .card .role { color: var(--accent); font-size: 0.7rem; margin-bottom: 1.5rem; }
+        .card ul { list-style: none; font-size: 0.9rem; color: var(--text-dim); }
+        .card li { margin-bottom: 0.8rem; position: relative; padding-left: 1.2rem; }
+        .card li::before { content: "→"; position: absolute; left: 0; color: var(--accent); }
+
+        /* Buttons & Socials */
         .btn {
-            background: var(--accent-green);
+            background: var(--accent);
             color: #000;
-            text-decoration: none;
             padding: 1rem 2rem;
-            display: inline-block;
+            text-decoration: none;
             font-weight: 600;
-            font-size: 0.8rem;
-            clip-path: polygon(10% 0, 100% 0, 100% 70%, 90% 100%, 0 100%, 0% 30%);
+            display: inline-block;
             transition: 0.3s;
         }
-        .btn:hover { transform: scale(1.05); box-shadow: 0 0 20px var(--accent-glow); }
+
+        .btn:hover { box-shadow: 0 0 30px var(--accent-glow); transform: translateY(-2px); }
+
+        .social-bar {
+            display: flex;
+            gap: 2rem;
+            margin-top: 4rem;
+            border-top: 1px solid var(--border);
+            padding-top: 2rem;
+        }
+
+        .social-bar a {
+            color: var(--text-dim);
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .social-bar a:hover { color: var(--accent); }
 
         @media (max-width: 768px) {
-            .hero { grid-template-columns: 1fr; text-align: center; }
-            .profile-container { order: -1; }
+            .hero { grid-template-columns: 1fr; text-align: center; gap: 3rem; }
+            .hero p { margin-left: auto; margin-right: auto; }
+            .profile-wrapper { order: -1; }
+            .social-bar { justify-content: center; flex-wrap: wrap; }
         }
     </style>
 </head>
 <body>
 
-    <div class="scanlines"></div>
-    
-    <!-- Floating Dragon Guardian -->
-    <svg class="dragon-guardian" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M10 50C30 20 70 80 90 50" stroke="#2CFF6B" stroke-width="0.5" opacity="0.5"/>
-        <path d="M5 45C25 15 65 75 85 45" stroke="#2CFF6B" stroke-width="0.2" stroke-dasharray="2 2"/>
-    </svg>
+    <div class="bg-dragon"></div>
 
     <div class="container">
         <nav>
-            <div class="logo mono">GREEN_NINJA // 0xAMAIBI</div>
-            <div class="status-pill mono">SYSTEM_OPERATIONAL</div>
+            <a href="#" class="logo mono">GREENNINJA // MORDI</a>
+            <div class="status mono">
+                <span class="dot"></span> NODE_ACTIVE
+            </div>
         </nav>
 
         <section class="hero">
             <div class="hero-content">
-                <p class="mono" style="color: var(--accent-green); font-size: 0.7rem; margin-bottom: 1rem;">[ REFI_ENTHUSIAST_INITIATED ]</p>
-                <h1>Patrick Innocent Amaibi</h1>
-                <p style="margin-bottom: 2rem; color: var(--text-dim);">Community Architect and Environmental Systems Thinker. Specializing in the deployment of sustainable digital ecosystems and high-impact visual protocols.</p>
-                <a href="https://wa.me/2349041298128" class="btn mono">Sync Connection</a>
+                <span class="section-tag mono">REFI ENTHUSIAST</span>
+                <h1>GreenNinja</h1>
+                <p>Architecting regenerative digital communities and visual design systems for the decentralized frontier.</p>
+                <a href="https://t.me/mordiweb3" class="btn mono">Initiate Comms</a>
             </div>
-            <div class="profile-container">
-                <!-- PROFILE PICTURE FILE LINKED HERE -->
-                <img src="greenninja.jpeg" alt="GreenNinja Profile" class="profile-img">
-            </div>
-        </section>
-
-        <section id="about">
-            <h2 class="mono">The Mission</h2>
-            <p style="max-width: 700px; margin-bottom: 2rem;">Operating at the intersection of <strong>Regenerative Finance (ReFi)</strong> and community infrastructure. My engineering background dictates a data-first approach to community health, ensuring that every protocol I manage is built for long-term sustainability and organic growth.</p>
-        </section>
-
-        <section id="stack">
-            <h2 class="mono">The Technical Stack</h2>
-            <div class="stack-grid mono">
-                <div class="stack-box">ReFi Architecture</div>
-                <div class="stack-box">Community Governance</div>
-                <div class="stack-box">Visual Strategy</div>
-                <div class="stack-box">Public Relations</div>
-                <div class="stack-box">Discord Engineering</div>
-                <div class="stack-box">Eco-Consultancy</div>
+            <div class="profile-wrapper">
+                <img src="greenninja.jpeg" alt="Patrick Innocent" class="profile-img">
             </div>
         </section>
 
-        <section id="work">
-            <h2 class="mono">Proof of Work</h2>
+        <section id="proof">
+            <span class="section-tag mono">PROOFS OF WORK</span>
+            <h2>On-Chain Contributions</h2>
             <div class="work-grid">
-                <div class="work-item">
-                    <div class="org mono">ICCD Initiative</div>
+                <!-- Role 1 -->
+                <div class="card">
+                    <span class="mono" style="font-size: 0.6rem;">PROJECT_01</span>
                     <h3>Graphics Team Lead</h3>
+                    <div class="role mono">Visual Strategy Protocol</div>
                     <ul>
-                        <li>Orchestrated design systems for climate data visualization.</li>
-                        <li>Synchronized creative assets across multi-chain departments.</li>
+                        <li>Led core design systems for global sustainability initiatives.</li>
+                        <li>Execution of digital assets across decentralized platforms.</li>
+                        <li>Alignment of visual narratives with organizational objectives.</li>
                     </ul>
                 </div>
-                <div class="work-item">
-                    <div class="org mono">Prime Initiative</div>
+
+                <!-- Role 2 -->
+                <div class="card">
+                    <span class="mono" style="font-size: 0.6rem;">PROJECT_02</span>
                     <h3>Communications Manager</h3>
+                    <div class="role mono">Regenerative Strategy</div>
                     <ul>
-                        <li>Evaluated community impact protocols for green programs.</li>
-                        <li>Drafted high-stakes advocacy logic for public relations.</li>
+                        <li>Architected communication protocols for community growth.</li>
+                        <li>Coordinated strategic relations for green-tech advocacy.</li>
+                        <li>Evaluated systemic impact across digital touchpoints.</li>
                     </ul>
                 </div>
-                <div class="work-item">
-                    <div class="org mono">PAIM CRYPTO</div>
-                    <h3>Discord Community Manager</h3>
+
+                <!-- Role 3 -->
+                <div class="card">
+                    <span class="mono" style="font-size: 0.6rem;">PROJECT_03</span>
+                    <h3>Community Manager</h3>
+                    <div class="role mono">PAIM CRYPTO</div>
                     <ul>
-                        <li>Moderated high-frequency governance disputes.</li>
-                        <li>Developed community engagement loops and rituals.</li>
+                        <li>Governance moderation and dispute resolution.</li>
+                        <li>Facilitated high-frequency community-to-core developer sync.</li>
+                        <li>Executed engagement loops and event protocols.</li>
                     </ul>
                 </div>
             </div>
         </section>
 
-        <section id="terminal" style="margin-top: 4rem;">
-            <div style="background: #000; padding: 1rem; border-radius: 4px; border: 1px solid var(--accent-soft);">
-                <p class="mono" style="font-size: 0.7rem; color: var(--accent-green);">
-                    $ ping 0xGreenNinja<br>
-                    > Reply from 234.81.682: bytes=32 time=12ms TTL=64<br>
-                    $ status --socials<br>
-                    > <a href="https://x.com/0xgreenninja" style="color: #fff;">Twitter: @0xgreenninja</a><br>
-                    > <a href="mailto:patrickamaibi@gmail.com" style="color: #fff;">Email: Sync@Patrick</a>
+        <section id="terminal">
+            <div style="background: rgba(0,0,0,0.5); padding: 2rem; border: 1px solid var(--border); border-radius: 4px;">
+                <p class="mono" style="font-size: 0.8rem; color: var(--accent);">
+                    $ contact --request<br>
+                    > Protocol: mordiweb3<br>
+                    > Location: Rivers State, Nigeria<br>
+                    > Skillset: Management, UI Strategy, PR Architecture<br>
+                    $ _
                 </p>
+                <div class="social-bar mono">
+                    <a href="mailto:mordiweb3@gmail.com">Email: mordiweb3@gmail.com</a>
+                    <a href="https://t.me/mordiweb3" target="_blank">Telegram: @mordiweb3</a>
+                    <a href="https://x.com/0xgreenninja" target="_blank">X: @0xgreenninja</a>
+                </div>
             </div>
         </section>
 
-        <footer style="padding: 6rem 0 3rem; text-align: center; color: var(--text-dim); font-size: 0.6rem;" class="mono">
-            &copy; 2024 PATRICK INNOCENT AMAIBI // ALL SYSTEMS NOMINAL
+        <footer style="padding: 4rem 0; text-align: center; color: rgba(255,255,255,0.2);" class="mono">
+            &copy; 2025 GREENNINJA // THE QUIET OPERATOR
         </footer>
     </div>
 
     <script>
-        // Subtle Mouse Glow Follower
+        // Subtle Parallax for the profile image
         document.addEventListener('mousemove', (e) => {
-            const dragon = document.querySelector('.dragon-guardian');
-            const x = (window.innerWidth / 2 - e.pageX) / 40;
-            const y = (window.innerHeight / 2 - e.pageY) / 40;
-            dragon.style.transform = `translate(${x}px, ${y}px)`;
+            const img = document.querySelector('.profile-img');
+            const moveX = (window.innerWidth / 2 - e.pageX) / 50;
+            const moveY = (window.innerHeight / 2 - e.pageY) / 50;
+            img.style.transform = `rotateY(${moveX}deg) rotateX(${moveY}deg)`;
         });
 
-        // Intersection Observer for work items
+        // Intersection Observer for scroll reveal
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.style.opacity = "1";
-                    entry.target.style.transform = "translateX(0)";
+                    entry.target.style.transform = "translateY(0)";
                 }
             });
         }, { threshold: 0.1 });
 
-        document.querySelectorAll('.work-item').forEach(item => {
-            item.style.opacity = "0";
-            item.style.transform = "translateX(-20px)";
-            item.style.transition = "all 0.6s ease-out";
-            observer.observe(item);
+        document.querySelectorAll('.card').forEach(card => {
+            card.style.opacity = "0";
+            card.style.transform = "translateY(20px)";
+            card.style.transition = "0.6s ease-out";
+            observer.observe(card);
         });
     </script>
 </body>
