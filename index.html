@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GreenNinja</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0B0F0C;
+            --surface-secondary: #0F1512;
+            --accent-green: #2CFF6B;
+            --accent-soft: rgba(44, 255, 107, 0.15);
+            --text-main: #E0E0E0;
+            --text-dim: #94A3B8;
+            --transition-slow: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        .dragon-glow {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            width: 70vw;
+            height: 70vw;
+            background: radial-gradient(circle, var(--accent-soft) 0%, transparent 70%);
+            transform: translate(-50%, -50%);
+            z-index: -1;
+            opacity: 0.3;
+            pointer-events: none;
+            animation: drift 25s infinite alternate ease-in-out;
+        }
+
+        @keyframes drift {
+            from { transform: translate(-45%, -55%) scale(1); }
+            to { transform: translate(-55%, -45%) scale(1.15); }
+        }
+
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+
+        h1, h2, h3 { font-weight: 600; letter-spacing: -0.02em; color: #fff; }
+        h1 { font-size: 3.5rem; line-height: 1.1; margin-bottom: 1.5rem; }
+        h2 { font-size: 1.2rem; margin-bottom: 2rem; color: var(--accent-green); text-transform: uppercase; letter-spacing: 0.2em; }
+        p { max-width: 650px; margin-bottom: 1.5rem; color: var(--text-dim); }
+
+        nav { padding: 2.5rem 0; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-weight: 600; color: var(--accent-green); text-decoration: none; font-size: 1.1rem; letter-spacing: 2px; }
+
+        .hero {
+            padding: 6rem 0;
+            display: grid;
+            grid-template-columns: 1.3fr 0.7fr;
+            align-items: center;
+            gap: 4rem;
+        }
+
+        .refi-badge {
+            display: inline-block;
+            background: var(--accent-soft);
+            color: var(--accent-green);
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+        }
+
+        .hero-image-container img {
+            width: 100%;
+            max-width: 380px;
+            border-radius: 24px;
+            border: 1px solid rgba(44, 255, 107, 0.2);
+            box-shadow: 0 0 40px rgba(0,0,0,0.5);
+        }
+
+        section { padding: 5rem 0; opacity: 0; transform: translateY(30px); transition: var(--transition-slow); }
+        section.visible { opacity: 1; transform: translateY(0); }
+
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
+
+        .card {
+            background: var(--surface-secondary);
+            padding: 2.5rem;
+            border-radius: 16px;
+            border: 1px solid rgba(255,255,255,0.03);
+            transition: var(--transition-slow);
+        }
+
+        .card:hover {
+            border-color: var(--accent-green);
+            transform: translateY(-8px);
+            background: rgba(20, 28, 24, 1);
+        }
+
+        .card .date { font-size: 0.8rem; color: var(--accent-green); margin-bottom: 1rem; display: block; opacity: 0.8; }
+        .card ul { list-style: none; color: var(--text-dim); font-size: 0.95rem; }
+        .card li { margin-bottom: 0.6rem; position: relative; padding-left: 1.2rem; }
+        .card li::before { content: "•"; position: absolute; left: 0; color: var(--accent-green); }
+
+        .skills-grid { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+        .skill-tag {
+            background: var(--surface-secondary);
+            padding: 0.6rem 1.4rem;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            border: 1px solid rgba(255,255,255,0.08);
+            color: var(--text-main);
+            transition: 0.3s;
+        }
+        .skill-tag:hover { border-color: var(--accent-green); background: var(--accent-soft); }
+
+        .btn {
+            display: inline-block;
+            padding: 1.1rem 2.2rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition-slow);
+            cursor: pointer;
+            border: none;
+            font-size: 0.9rem;
+        }
+
+        .btn-primary { background: var(--accent-green); color: #000; }
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(44, 255, 107, 0.3); }
+
+        .contact-links { display: flex; gap: 2rem; margin-top: 3rem; }
+        .contact-links a { color: var(--text-dim); text-decoration: none; transition: 0.3s; font-size: 0.9rem; }
+        .contact-links a:hover { color: var(--accent-green); }
+
+        @media (max-width: 768px) {
+            .hero { grid-template-columns: 1fr; text-align: center; padding: 2rem 0; }
+            .hero-image-container { order: -1; }
+            h1 { font-size: 2.8rem; }
+            p { margin: 0 auto 1.5rem; }
+            .contact-links { justify-content: center; flex-wrap: wrap; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="dragon-glow"></div>
+
+    <div class="container">
+        <nav>
+            <a href="#" class="logo">GREENNINJA</a>
+            <div class="nav-links"></div>
+        </nav>
+
+        <section class="hero visible">
+            <div class="hero-content">
+                <div class="refi-badge">ReFi & Systems Enthusiast</div>
+                <h1>Patrick Innocent Amaibi</h1>
+                <p>Community Manager and Environmental Engineer building at the intersection of regenerative finance, green development, and decentralized systems.</p>
+                <a href="https://wa.me/2349041298128" class="btn btn-primary">Connect on WhatsApp</a>
+            </div>
+            <div class="hero-image-container">
+                <img src="https://i.imgur.com/rA8fV7u.png" alt="Patrick Innocent Amaibi - GreenNinja Profile">
+            </div>
+        </section>
+
+        <section id="philosophy">
+            <h2>The Vision</h2>
+            <p>I am a <strong>ReFi (Regenerative Finance) Enthusiast</strong>. My background in Environmental Engineering drives my passion for systems that don't just extract value, but restore it.</p>
+            <p>I apply this philosophy to community management: building healthy, self-sustaining digital ecosystems that thrive on clear communication and disciplined execution.</p>
+        </section>
+
+        <section id="skills">
+            <h2>The Toolkit</h2>
+            <div class="skills-grid">
+                <span class="skill-tag">ReFi Ecosystems</span>
+                <span class="skill-tag">Community Architecture</span>
+                <span class="skill-tag">Environmental Strategy</span>
+                <span class="skill-tag">Graphic Communication</span>
+                <span class="skill-tag">Public Relations</span>
+                <span class="skill-tag">Discord Operations</span>
+                <span class="skill-tag">Program Design</span>
+                <span class="skill-tag">Emotional Intelligence</span>
+            </div>
+        </section>
+
+        <section id="experience">
+            <h2>Track Record</h2>
+            <div class="grid">
+                <div class="card">
+                    <span class="date">July 2023 - July 2024</span>
+                    <h3>Graphics Team Lead</h3>
+                    <p>International Climate Change Development Initiative</p>
+                    <ul>
+                        <li>Led a team to visualizes climate impact data.</li>
+                        <li>Implemented cohesive cross-department design strategies.</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <span class="date">May 2023 - Sep 2024</span>
+                    <h3>Communications Manager</h3>
+                    <p>Prime Initiative for Green Development</p>
+                    <ul>
+                        <li>Evaluated community impact for green programs.</li>
+                        <li>Developed strategic PR for advocacy relations.</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <span class="date">Sep 2023 - June 2024</span>
+                    <h3>Discord Community Manager</h3>
+                    <p>PAIM CRYPTO</p>
+                    <ul>
+                        <li>Managed community governance and moderation.</li>
+                        <li>Organized high-engagement community events.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="education">
+            <h2>Foundations</h2>
+            <div class="card" style="max-width: 500px;">
+                <span class="date">2015 - 2021</span>
+                <h3>Bachelor of Engineering</h3>
+                <p>University of Port Harcourt</p>
+                <p style="color: var(--accent-green); font-size: 0.9rem;">Environmental Engineering</p>
+            </div>
+        </section>
+
+        <section id="contact">
+            <h2>Contact</h2>
+            <p>Open for collaborations in ReFi, community building, or environmental communication projects.</p>
+            <div class="contact-links">
+                <a href="https://x.com/0xgreenninja" target="_blank">X / @0xgreenninja</a>
+                <a href="mailto:patrickamaibi@gmail.com">Email Profile</a>
+                <a href="https://wa.me/2349041298128">Direct WhatsApp</a>
+            </div>
+        </section>
+
+        <footer style="padding: 4rem 0; font-size: 0.75rem; color: var(--text-dim); text-align: center; border-top: 1px solid rgba(255,255,255,0.03); letter-spacing: 1px;">
+            &copy; <span id="year"></span> PATRICK INNOCENT AMAIBI | OPERATING IN THE GREEN
+        </footer>
+    </div>
+
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('visible');
+            });
+        }, { threshold: 0.15 });
+
+        document.querySelectorAll('section').forEach(section => observer.observe(section));
+
+        document.addEventListener('mousemove', (e) => {
+            const moveX = (e.clientX - window.innerWidth / 2) * 0.015;
+            const moveY = (e.clientY - window.innerHeight / 2) * 0.015;
+            document.querySelector('.dragon-glow').style.transform = `translate(calc(-50% + ${moveX}px), calc(-50% + ${moveY}px))`;
+        });
+    </script>
+</body>
+</html>
