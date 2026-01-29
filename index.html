@@ -93,7 +93,7 @@
         .skill-node:hover { border-color: var(--accent-neon); transform: translateY(-4px); background: rgba(44, 255, 107, 0.05); }
 
         /* Proof of Work */
-        .pow-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; }
+        .pow-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; margin-bottom: 8rem; }
         .pow-card {
             background: var(--surface-glass);
             border: 1px solid var(--border-web3);
@@ -109,6 +109,51 @@
         .pow-card ul { list-style: none; color: var(--text-secondary); font-size: 0.95rem; }
         .pow-card li { margin-bottom: 0.8rem; position: relative; padding-left: 1.5rem; }
         .pow-card li::before { content: "//"; position: absolute; left: 0; color: var(--accent-neon); opacity: 0.5; }
+
+        /* New Projects Section Styles */
+        .projects-header { margin-bottom: 3rem; }
+        .projects-header h2 { font-size: 2.5rem; margin-bottom: 0.5rem; }
+        .project-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; margin-bottom: 8rem; }
+        .project-card {
+            background: var(--surface-glass);
+            border: 1px solid var(--border-web3);
+            border-radius: 4px;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            backdrop-filter: blur(12px);
+            display: flex;
+            flex-direction: column;
+        }
+        .project-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--accent-neon);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+        .project-img {
+            width: 100%;
+            height: 240px;
+            object-fit: cover;
+            border-bottom: 1px solid var(--border-web3);
+            border-radius: 4px 4px 0 0;
+        }
+        .project-content { padding: 2rem; flex-grow: 1; display: flex; flex-direction: column; }
+        .project-content h3 { font-size: 1.5rem; margin-bottom: 1rem; }
+        .project-content p { color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 1.5rem; }
+        .project-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 2rem; }
+        .project-tags span { font-size: 0.6rem; color: var(--accent-neon); border: 1px solid rgba(44, 255, 107, 0.3); padding: 4px 8px; border-radius: 2px; }
+        .btn-project {
+            margin-top: auto;
+            text-decoration: none;
+            color: #000;
+            background: var(--accent-neon);
+            padding: 12px 24px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 0.8rem;
+            border-radius: 2px;
+            transition: 0.3s;
+        }
+        .btn-project:hover { filter: brightness(1.1); }
 
         /* Terminal Footer */
         .terminal {
@@ -134,6 +179,7 @@
             .profile-container { order: -1; }
             .profile-hex { width: 260px; height: 260px; }
             .cta-bar { flex-direction: column; gap: 1rem; }
+            .project-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -206,6 +252,56 @@
             </div>
         </section>
 
+        <!-- New Projects Section -->
+        <section id="projects">
+            <span class="label mono">[ PORTFOLIO_DEPLOYMENT ]</span>
+            <div class="projects-header">
+                <h2>Things I've Built</h2>
+                <p class="mono" style="color: var(--text-secondary); font-size: 0.8rem;">A collection of projects from my vibe coding journey</p>
+            </div>
+            
+            <div class="project-grid">
+                <!-- Project 1 -->
+                <div class="project-card">
+                    <img src="app.jpeg" alt="Climate Care" class="project-img">
+                    <div class="project-content">
+                        <h3>Climate Care</h3>
+                        <p><strong>A health-focused app that helps people feel, understand, and cope with climate change in their daily lives.</strong><br>Built with HTML, CSS, and JavaScript.</p>
+                        <div class="project-tags mono">
+                            <span>HTML</span><span>CSS</span><span>JavaScript</span><span>Personal Tool</span>
+                        </div>
+                        <a href="https://climatecheck.lovable.app" target="_blank" class="btn-project mono">View Project</a>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="project-card">
+                    <img src="bio.jpeg" alt="Link-in-Bio" class="project-img">
+                    <div class="project-content">
+                        <h3>Link-in-Bio Page</h3>
+                        <p>A custom landing page for social profiles. No Linktree needed — fully self-hosted and customizable.</p>
+                        <div class="project-tags mono">
+                            <span>HTML</span><span>CSS</span><span>Personal Brand</span>
+                        </div>
+                        <a href="https://0xgreenninja.github.io/me/" target="_blank" class="btn-project mono">View Project</a>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="project-card">
+                    <img src="snake.jpeg" alt="Snake Game" class="project-img">
+                    <div class="project-content">
+                        <h3>Fun Snake Game</h3>
+                        <p>A fun snake game built to demonstrate interactive logic and state management in the browser.</p>
+                        <div class="project-tags mono">
+                            <span>JavaScript</span><span>Game</span><span>Interactive</span>
+                        </div>
+                        <a href="https://mordecaih1.github.io/patrickamaibi/snake.html" target="_blank" class="btn-project mono">View Project</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <section class="terminal" id="terminal">
             <div class="terminal-header">
                 <div class="t-dot t-green"></div><div class="t-dot"></div><div class="t-dot"></div>
@@ -240,7 +336,7 @@
             });
         }, { threshold: 0.1 });
 
-        document.querySelectorAll('.pow-card, .skill-node').forEach(el => {
+        document.querySelectorAll('.pow-card, .skill-node, .project-card').forEach(el => {
             el.style.opacity = "0";
             el.style.transform = "translateY(30px)";
             el.style.transition = "all 0.8s cubic-bezier(0.16, 1, 0.3, 1)";
