@@ -9,20 +9,25 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-obsidian: #030303;
-            --surface-glass: rgba(18, 22, 20, 0.7);
+            /* New "Transparent Green" Palette */
+            --bg-deep-green: #05160d; 
+            --bg-gradient: radial-gradient(circle at 50% 50%, #0d2b1a 0%, #051109 100%);
+            
+            --surface-glass: rgba(20, 45, 30, 0.6); 
             --accent-neon: #2CFF6B;
-            --accent-glow: rgba(44, 255, 107, 0.25);
-            --text-primary: #F8FAFC;
-            --text-secondary: #94A3B8;
-            --border-web3: rgba(44, 255, 107, 0.12);
-            --dragon-opacity: 0.04;
+            --accent-glow: rgba(44, 255, 107, 0.3);
+            --text-primary: #F0FFF4; 
+            --text-secondary: #a3c9ae; 
+            --border-web3: rgba(44, 255, 107, 0.2);
+            --dragon-opacity: 0.07;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
 
         body {
-            background-color: var(--bg-obsidian);
+            background-color: var(--bg-deep-green);
+            background-image: var(--bg-gradient);
+            background-attachment: fixed;
             color: var(--text-primary);
             font-family: 'Inter', sans-serif;
             overflow-x: hidden;
@@ -38,7 +43,6 @@
             opacity: var(--dragon-opacity);
             z-index: -2;
             pointer-events: none;
-            filter: grayscale(1);
         }
 
         .container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
@@ -47,7 +51,15 @@
         nav { padding: 3rem 0; display: flex; justify-content: space-between; align-items: center; }
         
         .mono { font-family: 'JetBrains Mono', monospace; text-transform: uppercase; letter-spacing: 2px; font-size: 0.7rem; }
-        .logo { color: var(--accent-neon); font-weight: 600; text-decoration: none; border: 1px solid var(--accent-neon); padding: 6px 16px; }
+        .logo { 
+            color: var(--accent-neon); 
+            font-weight: 600; 
+            text-decoration: none; 
+            border: 1px solid var(--accent-neon); 
+            padding: 6px 16px; 
+            background: rgba(44, 255, 107, 0.05);
+            backdrop-filter: blur(4px);
+        }
         .status { display: flex; align-items: center; gap: 8px; color: var(--accent-neon); }
         .pulse-dot { width: 6px; height: 6px; background: var(--accent-neon); border-radius: 50%; box-shadow: 0 0 12px var(--accent-neon); animation: blink 2s infinite; }
 
@@ -55,7 +67,7 @@
 
         /* Hero */
         .hero { padding: 4rem 0 10rem; display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 6rem; align-items: center; }
-        h1 { font-size: clamp(2.5rem, 6vw, 4.2rem); font-weight: 600; line-height: 1.05; margin-bottom: 1.5rem; letter-spacing: -2px; }
+        h1 { font-size: clamp(2.5rem, 6vw, 4.2rem); font-weight: 600; line-height: 1.05; margin-bottom: 1.5rem; letter-spacing: -2px; text-shadow: 0 0 30px rgba(44, 255, 107, 0.2); }
         .hero-bio { font-size: 1.2rem; color: var(--text-secondary); max-width: 550px; margin-bottom: 3rem; font-weight: 300; }
 
         /* Bouncing Profile */
@@ -69,7 +81,7 @@
             box-shadow: 0 0 40px var(--accent-glow);
             animation: floatBounce 6s infinite ease-in-out;
             filter: contrast(1.05) brightness(1.1);
-            background: var(--bg-obsidian);
+            background: var(--bg-deep-green);
         }
 
         @keyframes floatBounce {
@@ -77,20 +89,19 @@
             50% { transform: translateY(-30px) rotate(1deg); }
         }
 
-        .profile-hex:hover { box-shadow: 0 0 60px var(--accent-neon); }
-
         /* Infrastructure / Skills */
-        .label { color: var(--accent-neon); display: block; margin-bottom: 1.5rem; font-weight: 500; }
+        .label { color: var(--accent-neon); display: block; margin-bottom: 1.5rem; font-weight: 500; text-shadow: 0 0 10px var(--accent-glow); }
         .skill-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 12px; margin-bottom: 8rem; }
         .skill-node {
             background: var(--surface-glass);
             border: 1px solid var(--border-web3);
             padding: 1.5rem;
             text-align: center;
-            backdrop-filter: blur(8px);
+            backdrop-filter: blur(12px);
             transition: 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            color: var(--text-primary);
         }
-        .skill-node:hover { border-color: var(--accent-neon); transform: translateY(-4px); background: rgba(44, 255, 107, 0.05); }
+        .skill-node:hover { border-color: var(--accent-neon); transform: translateY(-4px); background: rgba(44, 255, 107, 0.15); }
 
         /* Proof of Work */
         .pow-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; margin-bottom: 8rem; }
@@ -100,17 +111,17 @@
             padding: 3rem;
             border-radius: 2px;
             position: relative;
-            backdrop-filter: blur(12px);
+            backdrop-filter: blur(16px);
         }
         .pow-card::before { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: linear-gradient(90deg, var(--accent-neon), transparent); opacity: 0; transition: 0.4s; }
         .pow-card:hover::before { opacity: 1; }
         .pow-card h3 { font-size: 1.4rem; margin-bottom: 0.5rem; }
-        .pow-tag { font-size: 0.65rem; color: var(--accent-neon); background: rgba(44, 255, 107, 0.1); padding: 4px 10px; display: inline-block; margin-bottom: 2rem; }
+        .pow-tag { font-size: 0.65rem; color: var(--accent-neon); background: rgba(44, 255, 107, 0.15); padding: 4px 10px; display: inline-block; margin-bottom: 2rem; border: 1px solid var(--border-web3); }
         .pow-card ul { list-style: none; color: var(--text-secondary); font-size: 0.95rem; }
         .pow-card li { margin-bottom: 0.8rem; position: relative; padding-left: 1.5rem; }
-        .pow-card li::before { content: "//"; position: absolute; left: 0; color: var(--accent-neon); opacity: 0.5; }
+        .pow-card li::before { content: "//"; position: absolute; left: 0; color: var(--accent-neon); opacity: 0.7; }
 
-        /* New Projects Section Styles */
+        /* Projects Section */
         .projects-header { margin-bottom: 3rem; }
         .projects-header h2 { font-size: 2.5rem; margin-bottom: 0.5rem; }
         .project-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; margin-bottom: 8rem; }
@@ -120,31 +131,34 @@
             border-radius: 4px;
             overflow: hidden;
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            backdrop-filter: blur(12px);
+            backdrop-filter: blur(16px);
             display: flex;
             flex-direction: column;
         }
         .project-card:hover {
             transform: translateY(-8px);
             border-color: var(--accent-neon);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            background: rgba(25, 55, 35, 0.8);
         }
         .project-img {
             width: 100%;
             height: 240px;
             object-fit: cover;
             border-bottom: 1px solid var(--border-web3);
-            border-radius: 4px 4px 0 0;
+            filter: saturate(0.8) brightness(0.9);
+            transition: 0.3s;
         }
+        .project-card:hover .project-img { filter: saturate(1.1) brightness(1); }
         .project-content { padding: 2rem; flex-grow: 1; display: flex; flex-direction: column; }
-        .project-content h3 { font-size: 1.5rem; margin-bottom: 1rem; }
+        .project-content h3 { font-size: 1.5rem; margin-bottom: 1rem; color: var(--accent-neon); }
         .project-content p { color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 1.5rem; }
         .project-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 2rem; }
-        .project-tags span { font-size: 0.6rem; color: var(--accent-neon); border: 1px solid rgba(44, 255, 107, 0.3); padding: 4px 8px; border-radius: 2px; }
+        .project-tags span { font-size: 0.6rem; color: var(--accent-neon); border: 1px solid rgba(44, 255, 107, 0.3); padding: 4px 8px; border-radius: 2px; background: rgba(44, 255, 107, 0.05); }
         .btn-project {
             margin-top: auto;
             text-decoration: none;
-            color: #000;
+            color: #05160d;
             background: var(--accent-neon);
             padding: 12px 24px;
             text-align: center;
@@ -152,27 +166,32 @@
             font-size: 0.8rem;
             border-radius: 2px;
             transition: 0.3s;
+            box-shadow: 0 4px 15px var(--accent-glow);
         }
-        .btn-project:hover { filter: brightness(1.1); }
+        .btn-project:hover { filter: brightness(1.1); transform: scale(1.02); }
 
         /* Terminal Footer */
         .terminal {
-            background: #000;
-            border: 1px solid var(--border-web3);
+            background: rgba(5, 15, 10, 0.85); 
+            border: 1px solid var(--accent-neon);
             padding: 3rem;
             margin-top: 6rem;
             border-radius: 4px;
             position: relative;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 50px rgba(0,0,0,0.5);
         }
         .terminal-header { display: flex; gap: 6px; margin-bottom: 1.5rem; }
-        .t-dot { width: 10px; height: 10px; border-radius: 50%; background: #333; }
-        .t-green { background: var(--accent-neon); }
-        .terminal-body { color: var(--accent-neon); font-size: 0.9rem; line-height: 1.8; }
+        .t-dot { width: 10px; height: 10px; border-radius: 50%; background: #1a3324; }
+        .t-green { background: var(--accent-neon); box-shadow: 0 0 10px var(--accent-neon); }
+        .terminal-body { color: var(--accent-neon); font-size: 0.9rem; line-height: 1.8; text-shadow: 0 0 5px var(--accent-glow); }
         
         .cta-bar { display: flex; gap: 2.5rem; margin-top: 3rem; border-top: 1px solid var(--border-web3); padding-top: 2rem; flex-wrap: wrap; }
         .cta-bar a { color: var(--text-secondary); text-decoration: none; transition: 0.3s; font-size: 0.85rem; position: relative; }
-        .cta-bar a:hover { color: var(--accent-neon); }
+        .cta-bar a:hover { color: var(--accent-neon); text-shadow: 0 0 8px var(--accent-glow); }
         .cta-bar a:hover::after { content: " _"; }
+
+        footer { padding: 6rem 0 4rem; text-align: center; color: var(--text-secondary); font-size: 0.7rem; opacity: 0.6; }
 
         @media (max-width: 768px) {
             .hero { grid-template-columns: 1fr; text-align: center; gap: 4rem; }
@@ -200,7 +219,7 @@
                 <p class="hero-bio">
                    Web3 builder and community architect specializing in <strong>Graphic Design</strong> and <strong>Web Development</strong> for regenerative ecosystems.
                 </p>
-                <a href="#terminal" class="mono" style="background: var(--accent-neon); color: #000; padding: 18px 40px; text-decoration: none; font-weight: 600; border-radius: 2px; display: inline-block;">Request Integration</a>
+                <a href="#terminal" class="mono" style="background: var(--accent-neon); color: #05160d; padding: 18px 40px; text-decoration: none; font-weight: 600; border-radius: 2px; display: inline-block; box-shadow: 0 4px 20px var(--accent-glow);">Request Integration</a>
             </div>
             <div class="profile-container">
                 <img src="greenninja.jpeg" alt="GreenNinja" class="profile-hex">
@@ -252,7 +271,6 @@
             </div>
         </section>
 
-        <!-- New Projects Section -->
         <section id="projects">
             <span class="label mono">[ PORTFOLIO_DEPLOYMENT ]</span>
             <div class="projects-header">
@@ -266,7 +284,7 @@
                     <img src="app.png" alt="Climate Care" class="project-img">
                     <div class="project-content">
                         <h3>Climate Care</h3>
-                        <p><strong>A health-focused app that helps people feel, understand, and cope with climate change in their daily lives.</strong><br>Built with HTML, CSS, and JavaScript.</p>
+                        <p><strong>A health-focused app that helps people cope with climate change.</strong><br>Built with HTML, CSS, and JavaScript.</p>
                         <div class="project-tags mono">
                             <span>HTML</span><span>CSS</span><span>JavaScript</span><span>Personal Tool</span>
                         </div>
@@ -279,7 +297,7 @@
                     <img src="bio.png" alt="Link-in-Bio" class="project-img">
                     <div class="project-content">
                         <h3>Link-in-Bio Page</h3>
-                        <p>A custom landing page for social profiles. No Linktree needed fully self-hosted and customizable.</p>
+                        <p>A custom landing page for social profiles. fully self-hosted and customizable.</p>
                         <div class="project-tags mono">
                             <span>HTML</span><span>CSS</span><span>Personal Brand</span>
                         </div>
@@ -326,7 +344,6 @@
     </div>
 
     <script>
-        // Smooth Reveal Logic
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
